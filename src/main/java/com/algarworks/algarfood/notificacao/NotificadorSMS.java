@@ -1,8 +1,10 @@
 package com.algarworks.algarfood.notificacao;
 
 import com.algarworks.algarfood.modelo.Cliente;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+@Qualifier("sms")
 @Component
 public class NotificadorSMS implements Notificador {
 
