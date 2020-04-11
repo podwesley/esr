@@ -1,15 +1,13 @@
 package com.algarworks.algarfood.notificacao;
 
 import com.algarworks.algarfood.modelo.Cliente;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
-@Profile("prod")
+@Profile("dev")
 @TipoNotificador(NivelNotificacao.EMAIL)
 @Component
-public class NotificadorEmail implements Notificador {
+public class NotificadorEmailMock implements Notificador {
 
     private boolean caixaAlta;
 
@@ -18,7 +16,7 @@ public class NotificadorEmail implements Notificador {
         if (this.caixaAlta)
             mensagem = mensagem.toUpperCase();
 
-        System.out.printf("Notificando %s através do e-mail %s: %s\n",
+        System.out.printf("MOCK: notificação seria enviada para %s através do e-mail %s: %s\n",
                 cliente.getNome(), cliente.getEmail(), mensagem);
     }
 
