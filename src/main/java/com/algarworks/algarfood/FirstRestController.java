@@ -1,6 +1,6 @@
 package com.algarworks.algarfood;
 
-import com.algarworks.algarfood.di.AtivacaoClienteService;
+import com.algarworks.algarfood.service.AtivacaoClienteService;
 import com.algarworks.algarfood.modelo.Cliente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -1,14 +1,12 @@
-package com.algarworks.algarfood.di;
+package com.algarworks.algarfood.service;
 
 import com.algarworks.algarfood.modelo.Cliente;
 import com.algarworks.algarfood.notificacao.NivelNotificacao;
 import com.algarworks.algarfood.notificacao.Notificador;
 import com.algarworks.algarfood.notificacao.TipoNotificador;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 @Component
 public class AtivacaoClienteService {
@@ -17,10 +15,11 @@ public class AtivacaoClienteService {
     @Autowired
     private Notificador notificador;
 
+    @Autowired
+    private ApplicationEventPublisher eventPublisher;
 
     public void ativar(Cliente cliente) {
         cliente.ativar();
-
-        this.notificador.notificar(cliente, "Seu cadastro no sistema está ativo!");
+        eventPublisher.publishEvent(new ClienteAtivadoEvent(cliente));
     }
 }
