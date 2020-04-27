@@ -29,4 +29,9 @@ public class CadastroCozinha {
         return entityManager.find(Cozinha.class , id);
     }
 
+    @Transactional
+    public Cozinha atualizar (Cozinha cozinha) {
+        return entityManager.merge(cozinha);
+    }
+
 }
