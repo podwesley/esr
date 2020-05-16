@@ -22,4 +22,8 @@ public class Restaurante {
 
     @Column(name = "taxa_frete")
     private BigDecimal taxaFrete;
+
+    //Muitos restaurantes possui uma cozinha.
+    @ManyToOne
+    private Cozinha cozinha;
 }
