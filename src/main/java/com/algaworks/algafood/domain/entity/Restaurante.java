@@ -5,7 +5,6 @@ import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.Objects;
 
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
@@ -20,11 +19,12 @@ public class Restaurante {
     @Column(name = "nome_restaurante")
     private String nome;
 
-    @Column(name = "taxa_frete")
+    @Column(name = "taxa_frete", nullable = false)
     private BigDecimal taxaFrete;
 
     //Muitos restaurantes possui uma cozinha.
     @ManyToOne
-    @JoinColumn(name = "cozinha_id")
+    @JoinColumn(name = "cozinha_id", nullable = false)
     private Cozinha cozinha;
+
 }
