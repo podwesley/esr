@@ -25,5 +25,6 @@ public class Restaurante {
 
     //Muitos restaurantes possui uma cozinha.
     @ManyToOne
+    @JoinColumn(name = "cozinha_id")
     private Cozinha cozinha;
 }
