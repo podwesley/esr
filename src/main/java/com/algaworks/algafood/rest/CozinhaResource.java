@@ -24,9 +24,4 @@ public class CozinhaResource {
         return service.buscarPorId(id);
     }
 
-    @PostMapping
-    public Cozinha salvar (@RequestParam Cozinha cozinha){
-        return service.salvar(cozinha);
-    }
-
 }
