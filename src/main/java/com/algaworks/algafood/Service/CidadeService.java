@@ -1,30 +1,8 @@
 package com.algaworks.algafood.Service;
 
-import com.algaworks.algafood.Repository.CidadeRepository;
-import com.algaworks.algafood.domain.entity.Cidade;
+import org.springframework.stereotype.Service;
 
-import java.util.List;
+@Service
+public class CidadeService {
 
-public class CidadeService implements CidadeRepository {
-
-
-    @Override
-    public List<Cidade> todas() {
-        return null;
-    }
-
-    @Override
-    public Cidade porId(Long id) {
-        return null;
-    }
-
-    @Override
-    public Cidade adicionar(Cidade usuario) {
-        return null;
-    }
-
-    @Override
-    public void remover(Cidade permissao) {
-
-    }
 }

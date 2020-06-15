@@ -1,4 +1,4 @@
-package com.algaworks.algafood.domain.entity;
+package com.algaworks.algafood.entity;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -8,17 +8,13 @@ import javax.persistence.*;
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
-public class Permissao {
+public class Cozinha {
 
     @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "permissao_nome", nullable = false)
+    @Column(name = "nome_cozinha")
     private String nome;
-
-
-    @Column(name = "permissao_descricao", nullable = false)
-    private String descricao;
 }
