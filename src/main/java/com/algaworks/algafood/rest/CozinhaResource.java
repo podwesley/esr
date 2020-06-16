@@ -20,7 +20,7 @@ public class CozinhaResource {
     }
 
     @GetMapping("{id}")
-    public Cozinha buscarPorId(@PathVariable("id") Long id) {
+    public Cozinha buscarPorId(@PathVariable Long id) {
         return service.buscarPorId(id);
     }
 
