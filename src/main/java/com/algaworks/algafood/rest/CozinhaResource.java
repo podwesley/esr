@@ -3,7 +3,9 @@ package com.algaworks.algafood.rest;
 import com.algaworks.algafood.Service.CozinhaService;
 import com.algaworks.algafood.entity.Cozinha;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,10 +22,15 @@ public class CozinhaResource {
         return service.todas();
     }
 
-    @ResponseStatus(value = HttpStatus.OK)
     @GetMapping("{id}")
-    public Cozinha buscarPorId(@PathVariable Long id) {
-        return service.buscarPorId(id);
+    public ResponseEntity<Cozinha> buscarPorId(@PathVariable Long id) {
+
+        Cozinha cozinha = service.buscarPorId(id);
+
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add(HttpHeaders.LOCATION, "http://localhost:8080/cozinhas");
+
+        return ResponseEntity.status(HttpStatus.FOUND).headers(httpHeaders).build();
     }
 
     @PostMapping
