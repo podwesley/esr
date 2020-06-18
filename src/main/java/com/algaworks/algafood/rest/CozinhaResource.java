@@ -23,14 +23,8 @@ public class CozinhaResource {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Cozinha> buscarPorId(@PathVariable Long id) {
-
-        Cozinha cozinha = service.buscarPorId(id);
-
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add(HttpHeaders.LOCATION, "http://localhost:8080/cozinhas");
-
-        return ResponseEntity.status(HttpStatus.FOUND).headers(httpHeaders).build();
+    public Cozinha buscarPorId(@PathVariable Long id) {
+        return service.buscarPorId(id);
     }
 
     @PostMapping
