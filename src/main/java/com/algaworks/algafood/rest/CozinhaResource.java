@@ -23,8 +23,14 @@ public class CozinhaResource {
     }
 
     @GetMapping("{id}")
-    public Cozinha buscarPorId(@PathVariable Long id) {
-        return service.buscarPorId(id);
+    public ResponseEntity<Cozinha> buscarPorId(@PathVariable Long id) {
+
+        Cozinha cozinha = service.buscarPorId(id);
+
+        if (cozinha == null)
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+
+        return ResponseEntity.ok(cozinha);
     }
 
     @PostMapping
