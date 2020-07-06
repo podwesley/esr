@@ -18,6 +18,7 @@ public class CozinhaResource {
     private CozinhaService service;
 
     @GetMapping
+
     public List<Cozinha> listar() {
         return service.todas();
     }
@@ -34,6 +35,7 @@ public class CozinhaResource {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public Cozinha salvar(@RequestBody Cozinha cozinha){
         return service.salvar(cozinha);
     }

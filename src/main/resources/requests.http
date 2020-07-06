@@ -1,0 +1,27 @@
+###
+GET / HTTP/1.1
+Host: www.google.com.br:443
+Accept: text/html
+
+
+###
+
+GET /users/podwesley/repos HTTP/1.1
+Host: api.github.com
+Accept: application/json
+
+###
+
+GET /cozinhas
+Host: localhost:8080
+Accept: application/json
+
+###
+
+POST /cozinhas HTTP/1.1
+Host: localhost:8080
+Content-Type: application/json
+
+{
+  "cozinha": "JAPONESA"
+}
