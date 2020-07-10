@@ -30,4 +30,8 @@ public class CozinhaService {
     public Cozinha alterar(Cozinha cozinha) {
         return repository.save(cozinha);
     }
+
+    public void apagar(Long id) {
+        repository.deleteById(id);
+    }
 }
