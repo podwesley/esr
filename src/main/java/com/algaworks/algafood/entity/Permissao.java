@@ -16,7 +16,7 @@ public class Permissao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JsonProperty("permiss√£o")
+    @JsonProperty("permiss„o")
     @Column(name = "permissao_nome", nullable = false)
     private String nome;
 

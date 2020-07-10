@@ -27,4 +27,7 @@ public class CozinhaService {
         return repository.save(cozinha);
     }
 
+    public Cozinha alterar(Cozinha cozinha) {
+        return repository.save(cozinha);
+    }
 }
