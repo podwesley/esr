@@ -2,8 +2,9 @@ package com.algaworks.algafood.rest;
 
 import com.algaworks.algafood.Service.CozinhaService;
 import com.algaworks.algafood.entity.Cozinha;
+import com.algaworks.algafood.exception.AlgaFoodRestricaoException;
+import com.algaworks.algafood.exception.AlgaFoodResultadoVazioException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -53,22 +54,13 @@ public class CozinhaResource {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
-
     @DeleteMapping("{id}")
     public ResponseEntity<Cozinha> delete(@PathVariable Long id) {
 
         try {
-            Cozinha findCozinha = service.buscarPorId(id);
-
-            if (findCozinha != null) {
-                service.apagar(id); //Caso ao deletar uma entidade tenha erro de constraint.
-                return ResponseEntity.noContent().build();
-            }
-
-            return ResponseEntity.notFound().build();
-
-        } catch (DataIntegrityViolationException e) {
-
+            service.apagar(id); //Caso ao deletar uma entidade tenha erro de constraint
+            return ResponseEntity.noContent().build();
+        } catch (AlgaFoodRestricaoException | AlgaFoodResultadoVazioException e) {
             return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
     }
