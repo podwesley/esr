@@ -1,6 +1,5 @@
 package com.algaworks.algafood.entity;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -17,11 +16,10 @@ public class Restaurante {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JsonProperty("restaurante")
-    @Column(name = "nome_restaurante", nullable = false)
+    @Column(nullable = false)
     private String nome;
 
-    @Column(name = "taxa_frete", nullable = false)
+    @Column(nullable = false)
     private BigDecimal taxaFrete;
 
     //Muitos restaurantes possui uma cozinha.

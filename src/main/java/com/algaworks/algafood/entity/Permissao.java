@@ -1,6 +1,5 @@
 package com.algaworks.algafood.entity;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -16,11 +15,9 @@ public class Permissao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JsonProperty("permissão")
-    @Column(name = "permissao_nome", nullable = false)
+    @Column(nullable = false)
     private String nome;
 
-
-    @Column(name = "permissao_descricao", nullable = false)
+    @Column(nullable = false)
     private String descricao;
 }
