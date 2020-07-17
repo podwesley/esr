@@ -1,6 +1,8 @@
 package com.algaworks.algafood.rest;
 
 import com.algaworks.algafood.Service.CidadeService;
+import com.algaworks.algafood.Service.CidadeService;
+import com.algaworks.algafood.entity.Cidade;
 import com.algaworks.algafood.entity.Cidade;
 import com.algaworks.algafood.exception.AlgaFoodRestricaoException;
 import com.algaworks.algafood.exception.AlgaFoodResultadoVazioException;
@@ -14,14 +16,13 @@ import java.util.List;
 @RestController
 @RequestMapping("cidades")
 public class CidadeResource {
-
-
+    
     @Autowired
     private CidadeService service;
 
     @GetMapping
     public List<Cidade> listar() {
-        return service.listarTodas();
+        return service.todas();
     }
 
     @GetMapping("{id}")
@@ -36,35 +37,46 @@ public class CidadeResource {
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public Cidade salvar(@RequestBody Cidade cidade) {
-        return service.salvar(cidade);
+    public ResponseEntity<?> salvar(@RequestBody Cidade cidade) {
+
+        try {
+
+            return ResponseEntity.status(HttpStatus.CREATED).body(service.salvar(cidade));
+
+        } catch (AlgaFoodResultadoVazioException e) {
+
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Cidade> alterar(@RequestBody Cidade cidade, @PathVariable Long id) {
+    public ResponseEntity<?> alterar(@RequestBody Cidade cidade, @PathVariable Long id) {
 
-        Cidade findCidade = service.buscarPorId(id);
+        try {
 
-        if (findCidade != null) {
-            findCidade.setEstado(cidade.getEstado());
+            Cidade findCidade = service.buscarPorId(id);
+
             findCidade.setNome(cidade.getNome());
+            findCidade.setEstado(cidade.getEstado());
             service.alterar(findCidade);
 
             return ResponseEntity.ok(findCidade);
+
+        } catch (AlgaFoodResultadoVazioException e) {
+
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+
     }
 
     @DeleteMapping("{id}")
     public ResponseEntity<Cidade> delete(@PathVariable Long id) {
 
         try {
-            service.deletar(id); //Caso ao deletar uma entidade tenha erro de constraint
+            service.apagar(id); //Caso ao deletar uma entidade tenha erro de constraint
             return ResponseEntity.noContent().build();
         } catch (AlgaFoodRestricaoException | AlgaFoodResultadoVazioException e) {
             return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
     }
-
 }

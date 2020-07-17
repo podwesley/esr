@@ -1,11 +1,20 @@
 package com.algaworks.algafood.Service;
 
 import com.algaworks.algafood.Repository.CidadeRepository;
+import com.algaworks.algafood.Repository.CidadeRepository;
 import com.algaworks.algafood.entity.Cidade;
+import com.algaworks.algafood.entity.Cozinha;
+import com.algaworks.algafood.entity.Cidade;
+import com.algaworks.algafood.entity.Estado;
+import com.algaworks.algafood.exception.AlgaFoodRestricaoException;
+import com.algaworks.algafood.exception.AlgaFoodResultadoVazioException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -14,43 +23,54 @@ public class CidadeService {
     @Autowired
     private CidadeRepository repository;
 
+    @Autowired
+    private EstadoService estadoService;
 
-    public List<Cidade> listarTodas() {
+    public List<Cidade> todas() {
         return repository.findAll();
     }
 
     public Cidade buscarPorId(Long id) {
 
-        Optional<Cidade> byId = repository.findById(id);
+        try {
 
-        Cidade cidade = byId.get();
+            return repository.findById(id).get();
 
-        return cidade;
-    }
-
-    public Cidade alterar(Cidade cidade) {
-
-        Optional<Cidade> byId = repository.findById(cidade.getId());
-
-        Cidade busca = byId.get();
-
-        if (busca != null) {
-            busca.setEstado(cidade.getEstado());
-            busca.setNome(cidade.getNome());
-            salvar(busca);
-            return busca;
+        } catch (NoSuchElementException e) {
+            throw new AlgaFoodResultadoVazioException(String.format("Não foi possível encontrar o cidade de id: %d", id));
         }
-        return null;
+
+
     }
 
     public Cidade salvar(Cidade cidade) {
-        Cidade save = repository.save(cidade);
-        return save;
+
+        Long idEstado = cidade.getEstado().getId();
+
+        Estado estado = estadoService.buscarPorId(idEstado);
+
+        if (estado == null)
+            throw new AlgaFoodResultadoVazioException(String.format("Não foi possível encontrar o estado de id: %d", idEstado));
+
+        cidade.setEstado(estado);
+        return repository.save(cidade);
     }
 
-    public void deletar(Long id) {
-        repository.deleteById(id);
+    public Cidade alterar(Cidade cidade) {
+        return this.salvar(cidade);
     }
+
+    public void apagar(Long id) {
+
+        try {
+            repository.deleteById(id);
+        } catch (DataIntegrityViolationException e) {
+            throw new AlgaFoodRestricaoException(String.format("Não foi possível apagar a cidade de id: %d pois a mesma encontra-se vinculadas a outros relacionamentos", id));
+        } catch (EmptyResultDataAccessException e) {
+            throw new AlgaFoodResultadoVazioException(String.format("a cidade de id: %d não existe.", id));
+        }
+    }
+
 
 
 }
