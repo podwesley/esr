@@ -27,7 +27,7 @@ public class CozinhaService {
         return null;
     }
 
-    public Cozinha salvar (Cozinha cozinha){
+    public Cozinha salvar(Cozinha cozinha) {
         return repository.save(cozinha);
     }
 

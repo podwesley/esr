@@ -1,8 +1,6 @@
 package com.algaworks.algafood.rest;
 
 import com.algaworks.algafood.Service.CidadeService;
-import com.algaworks.algafood.Service.CidadeService;
-import com.algaworks.algafood.entity.Cidade;
 import com.algaworks.algafood.entity.Cidade;
 import com.algaworks.algafood.exception.AlgaFoodRestricaoException;
 import com.algaworks.algafood.exception.AlgaFoodResultadoVazioException;
@@ -16,7 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("cidades")
 public class CidadeResource {
-    
+
     @Autowired
     private CidadeService service;
 

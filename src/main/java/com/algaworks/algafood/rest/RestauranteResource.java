@@ -4,12 +4,16 @@ import com.algaworks.algafood.Service.RestauranteService;
 import com.algaworks.algafood.entity.Restaurante;
 import com.algaworks.algafood.exception.AlgaFoodRestricaoException;
 import com.algaworks.algafood.exception.AlgaFoodResultadoVazioException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.ReflectionUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("restaurantes")
@@ -80,4 +84,43 @@ public class RestauranteResource {
         }
     }
 
+    /**
+     * Atualiza de forma parcial os recursos.
+     * @param campos
+     * @param id
+     * @return
+     */
+    @PatchMapping("{id}")
+    public ResponseEntity<?> atualizarParcial(@RequestBody Map<String, Object> campos, @PathVariable Long id) {
+
+        Restaurante findRestaurante = service.buscarPorId(id);
+
+        if (findRestaurante == null)
+            return ResponseEntity.notFound().build();
+
+        //***********************************
+
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        //Converte todos os valores dos campos para o seu devido tipo.
+        Restaurante novo = objectMapper.convertValue(campos, Restaurante.class);
+
+        //Usaremos a API de reflection para atualizar os rescursos com o patch.
+        campos.forEach((key, value) -> {
+
+            //Pega um campo dentro de restaurante e pega o valor que foi passando na request.
+            Field campo = ReflectionUtils.findField(Restaurante.class, key);
+
+            //Acessar uma propriedade privada da classe lah. gato da poah.
+            campo.setAccessible(true);
+
+            Object novoValor = ReflectionUtils.getField(campo, novo);
+
+            //Seta o valor exatamente no campo do restaurante que foi buscado na base.
+            ReflectionUtils.setField(campo, findRestaurante, novoValor);
+
+        });
+
+        return alterar(findRestaurante, id);
+    }
 }

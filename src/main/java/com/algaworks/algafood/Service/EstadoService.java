@@ -1,10 +1,6 @@
 package com.algaworks.algafood.Service;
 
-import com.algaworks.algafood.Repository.CozinhaRepository;
 import com.algaworks.algafood.Repository.EstadoRepository;
-import com.algaworks.algafood.Repository.EstadoRepository;
-import com.algaworks.algafood.entity.Cozinha;
-import com.algaworks.algafood.entity.Estado;
 import com.algaworks.algafood.entity.Estado;
 import com.algaworks.algafood.exception.AlgaFoodRestricaoException;
 import com.algaworks.algafood.exception.AlgaFoodResultadoVazioException;

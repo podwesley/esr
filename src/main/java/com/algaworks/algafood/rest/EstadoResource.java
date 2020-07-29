@@ -1,8 +1,6 @@
 package com.algaworks.algafood.rest;
 
 import com.algaworks.algafood.Service.EstadoService;
-import com.algaworks.algafood.Service.EstadoService;
-import com.algaworks.algafood.entity.Estado;
 import com.algaworks.algafood.entity.Estado;
 import com.algaworks.algafood.exception.AlgaFoodRestricaoException;
 import com.algaworks.algafood.exception.AlgaFoodResultadoVazioException;

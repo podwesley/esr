@@ -1,9 +1,6 @@
 package com.algaworks.algafood.Service;
 
 import com.algaworks.algafood.Repository.CidadeRepository;
-import com.algaworks.algafood.Repository.CidadeRepository;
-import com.algaworks.algafood.entity.Cidade;
-import com.algaworks.algafood.entity.Cozinha;
 import com.algaworks.algafood.entity.Cidade;
 import com.algaworks.algafood.entity.Estado;
 import com.algaworks.algafood.exception.AlgaFoodRestricaoException;
@@ -15,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 @Service
 public class CidadeService {
@@ -70,7 +66,6 @@ public class CidadeService {
             throw new AlgaFoodResultadoVazioException(String.format("a cidade de id: %d não existe.", id));
         }
     }
-
 
 
 }
