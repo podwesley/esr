@@ -40,9 +40,9 @@ public class CozinhaService {
         try {
             repository.deleteById(id);
         } catch (DataIntegrityViolationException e) {
-            throw new AlgaFoodRestricaoException(String.format("N„o foi possÌvel apagar a cozinha de id: %d pois a mesma encontra-se vinculadas a outros relacionamentos", id));
+            throw new AlgaFoodRestricaoException(String.format("N√£o foi poss√≠vel apagar a cozinha de id: %d pois a mesma encontra-se vinculadas a outros relacionamentos", id));
         } catch (EmptyResultDataAccessException e) {
-            throw new AlgaFoodResultadoVazioException(String.format("a cozinha de id: %d n„o existe.", id));
+            throw new AlgaFoodResultadoVazioException(String.format("a cozinha de id: %d n√£o existe.", id));
         }
     }
 }

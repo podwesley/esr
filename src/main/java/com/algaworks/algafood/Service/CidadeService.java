@@ -33,7 +33,7 @@ public class CidadeService {
             return repository.findById(id).get();
 
         } catch (NoSuchElementException e) {
-            throw new AlgaFoodResultadoVazioException(String.format("N„o foi possÌvel encontrar o cidade de id: %d", id));
+            throw new AlgaFoodResultadoVazioException(String.format("N√£o foi poss√≠vel encontrar o cidade de id: %d", id));
         }
 
 
@@ -46,7 +46,7 @@ public class CidadeService {
         Estado estado = estadoService.buscarPorId(idEstado);
 
         if (estado == null)
-            throw new AlgaFoodResultadoVazioException(String.format("N„o foi possÌvel encontrar o estado de id: %d", idEstado));
+            throw new AlgaFoodResultadoVazioException(String.format("N√£o foi poss√≠vel encontrar o estado de id: %d", idEstado));
 
         cidade.setEstado(estado);
         return repository.save(cidade);
@@ -61,9 +61,9 @@ public class CidadeService {
         try {
             repository.deleteById(id);
         } catch (DataIntegrityViolationException e) {
-            throw new AlgaFoodRestricaoException(String.format("N„o foi possÌvel apagar a cidade de id: %d pois a mesma encontra-se vinculadas a outros relacionamentos", id));
+            throw new AlgaFoodRestricaoException(String.format("N√£o foi poss√≠vel apagar a cidade de id: %d pois a mesma encontra-se vinculadas a outros relacionamentos", id));
         } catch (EmptyResultDataAccessException e) {
-            throw new AlgaFoodResultadoVazioException(String.format("a cidade de id: %d n„o existe.", id));
+            throw new AlgaFoodResultadoVazioException(String.format("a cidade de id: %d n√£o existe.", id));
         }
     }
 

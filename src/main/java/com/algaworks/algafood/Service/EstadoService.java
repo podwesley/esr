@@ -30,7 +30,7 @@ public class EstadoService {
             return repository.findById(id).get();
 
         } catch (NoSuchElementException e) {
-            throw new AlgaFoodResultadoVazioException(String.format("N„o foi possÌvel encontrar o estado de id: %d", id));
+            throw new AlgaFoodResultadoVazioException(String.format("N√£o foi poss√≠vel encontrar o estado de id: %d", id));
         }
 
 
@@ -49,9 +49,9 @@ public class EstadoService {
         try {
             repository.deleteById(id);
         } catch (DataIntegrityViolationException e) {
-            throw new AlgaFoodRestricaoException(String.format("N„o foi possÌvel apagar o estado de id: %d pois o mesma encontra-se vinculados a outros relacionamentos", id));
+            throw new AlgaFoodRestricaoException(String.format("N√£o foi poss√≠vel apagar o estado de id: %d pois o mesma encontra-se vinculados a outros relacionamentos", id));
         } catch (EmptyResultDataAccessException e) {
-            throw new AlgaFoodResultadoVazioException(String.format("a estado de id: %d n„o existe.", id));
+            throw new AlgaFoodResultadoVazioException(String.format("a estado de id: %d n√£o existe.", id));
         }
     }
 
