@@ -34,6 +34,11 @@ public class CozinhaResource {
         return ResponseEntity.ok(cozinha);
     }
 
+    @GetMapping("nome")
+    public List<Cozinha> buscarPorNome(@RequestParam String nome) {
+        return service.buscarPorNome(nome);
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Cozinha salvar(@RequestBody Cozinha cozinha) {
@@ -64,4 +69,6 @@ public class CozinhaResource {
             return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
     }
+
+
 }

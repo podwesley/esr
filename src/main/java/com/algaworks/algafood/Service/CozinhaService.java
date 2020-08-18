@@ -9,6 +9,8 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Service
@@ -16,6 +18,10 @@ public class CozinhaService {
 
     @Autowired
     private CozinhaRepository repository;
+
+    //TODO - Remover esse lixo.
+    @PersistenceContext
+    private EntityManager entityManager;
 
     public List<Cozinha> todas() {
         return repository.findAll();
@@ -33,6 +39,15 @@ public class CozinhaService {
 
     public Cozinha alterar(Cozinha cozinha) {
         return repository.save(cozinha);
+    }
+
+    /**
+     * Busca uma Entidade por nome passando um paramentro para tal.
+     * @param nome
+     * @return
+     */
+    public List<Cozinha> buscarPorNome(String nome) {
+        return entityManager.createQuery("FROM Cozinha WHERE nome = :nome", Cozinha.class).setParameter("nome", nome).getResultList();
     }
 
     public void apagar(Long id) {
