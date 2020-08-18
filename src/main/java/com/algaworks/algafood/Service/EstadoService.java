@@ -10,7 +10,6 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @Service
 public class EstadoService {
@@ -24,16 +23,8 @@ public class EstadoService {
     }
 
     public Estado buscarPorId(Long id) {
-
-        try {
-
-            return repository.findById(id).get();
-
-        } catch (NoSuchElementException e) {
-            throw new AlgaFoodResultadoVazioException(String.format("Não foi possível encontrar o estado de id: %d", id));
-        }
-
-
+      return  repository.findById(id)
+                        .orElseThrow(() -> new AlgaFoodResultadoVazioException(String.format("Não foi possível encontrar o estado de id: %d", id)));
     }
 
     public Estado salvar(Estado estado) {

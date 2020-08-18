@@ -29,15 +29,8 @@ public class RestauranteService {
 
     public Restaurante buscarPorId(Long id) {
 
-        try {
-
-            return repository.findById(id).get();
-
-        } catch (NoSuchElementException e) {
-            throw new AlgaFoodResultadoVazioException(String.format("Não foi possível encontrar o restaurante de id: %d", id));
-        }
-
-
+            return repository.findById(id)
+                             .orElseThrow(() -> new AlgaFoodResultadoVazioException(String.format("Não foi possível encontrar o restaurante de id: %d", id)));
     }
 
     public Restaurante salvar(Restaurante restaurante) {
