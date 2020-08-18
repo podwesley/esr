@@ -47,7 +47,7 @@ public class CozinhaService {
      * @return
      */
     public List<Cozinha> buscarPorNome(String nome) {
-        return entityManager.createQuery("FROM Cozinha WHERE nome = :nome", Cozinha.class).setParameter("nome", nome).getResultList();
+        return entityManager.createQuery("FROM Cozinha WHERE nome LIKE :nome", Cozinha.class).setParameter("nome", "%" + nome + "%").getResultList();
     }
 
     public void apagar(Long id) {

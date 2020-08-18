@@ -1,5 +1,6 @@
 package com.algaworks.algafood.Service;
 
+import com.algaworks.algafood.Repository.CozinhaRepository;
 import com.algaworks.algafood.Repository.RestauranteRepository;
 import com.algaworks.algafood.entity.Cozinha;
 import com.algaworks.algafood.entity.Restaurante;
@@ -20,7 +21,7 @@ public class RestauranteService {
     private RestauranteRepository repository;
 
     @Autowired
-    private CozinhaService cozinhaService;
+    private CozinhaRepository cozinhaRepository;
 
     public List<Restaurante> todas() {
         return repository.findAll();
@@ -43,10 +44,8 @@ public class RestauranteService {
 
         Long idCozinha = restaurante.getCozinha().getId();
 
-        Cozinha cozinha = cozinhaService.buscarPorId(idCozinha);
-
-        if (cozinha == null)
-            throw new AlgaFoodResultadoVazioException(String.format("Não foi possível encontrar a cozinha de id: %d", idCozinha));
+        Cozinha cozinha = this.cozinhaRepository.findById(idCozinha)
+                                                .orElseThrow(() -> new AlgaFoodResultadoVazioException(String.format("Não foi possível encontrar a cozinha de id: %d", idCozinha)));
 
         restaurante.setCozinha(cozinha);
         return repository.save(restaurante);

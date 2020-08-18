@@ -34,7 +34,7 @@ public class CozinhaResource {
         return ResponseEntity.ok(cozinha);
     }
 
-    @GetMapping("nome")
+    @GetMapping("consultas")
     public List<Cozinha> buscarPorNome(@RequestParam String nome) {
         return service.buscarPorNome(nome);
     }

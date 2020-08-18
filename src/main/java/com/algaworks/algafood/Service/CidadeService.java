@@ -1,6 +1,7 @@
 package com.algaworks.algafood.Service;
 
 import com.algaworks.algafood.Repository.CidadeRepository;
+import com.algaworks.algafood.Repository.EstadoRepository;
 import com.algaworks.algafood.entity.Cidade;
 import com.algaworks.algafood.entity.Estado;
 import com.algaworks.algafood.exception.AlgaFoodRestricaoException;
@@ -20,7 +21,7 @@ public class CidadeService {
     private CidadeRepository repository;
 
     @Autowired
-    private EstadoService estadoService;
+    private EstadoRepository estadoService;
 
     public List<Cidade> todas() {
         return repository.findAll();
@@ -43,11 +44,8 @@ public class CidadeService {
 
         Long idEstado = cidade.getEstado().getId();
 
-        Estado estado = estadoService.buscarPorId(idEstado);
-
-        if (estado == null)
-            throw new AlgaFoodResultadoVazioException(String.format("Não foi possível encontrar o estado de id: %d", idEstado));
-
+        Estado estado = estadoService.findById(idEstado)
+                                     .orElseThrow(() -> new AlgaFoodResultadoVazioException(String.format("Não foi possível encontrar o estado de id: %d", idEstado)));
         cidade.setEstado(estado);
         return repository.save(cidade);
     }
@@ -66,6 +64,4 @@ public class CidadeService {
             throw new AlgaFoodResultadoVazioException(String.format("a cidade de id: %d não existe.", id));
         }
     }
-
-
 }
