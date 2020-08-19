@@ -11,8 +11,8 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @Service
 public class RestauranteService {
@@ -57,6 +57,22 @@ public class RestauranteService {
         } catch (EmptyResultDataAccessException e) {
             throw new AlgaFoodResultadoVazioException(String.format("a restaurante de id: %d não existe.", id));
         }
+    }
+
+    public List<Restaurante> buscarRestaurantesPorIntervaloDeTaxaFrete(BigDecimal txInicial, BigDecimal txFinal) {
+        return repository.findByTaxaFreteBetween(txInicial, txFinal);
+    }
+
+    public List<Restaurante> buscarPorNome(String nome) {
+        return repository.findBynome(nome);
+    }
+
+    public List<Restaurante> buscarPorParteDoNome (String parteNome) {
+        return repository.findByNomeContaining(parteNome);
+    }
+
+    public List<Restaurante> buscarPorNomeRestauranteIdCozinhaa (String nome, Long cozinha) {
+        return repository.findByNomeContainingAndCozinhaId(nome, cozinha);
     }
 
 

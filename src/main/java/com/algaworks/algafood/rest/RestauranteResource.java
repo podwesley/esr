@@ -1,6 +1,5 @@
 package com.algaworks.algafood.rest;
 
-import com.algaworks.algafood.Repository.RestauranteRepository;
 import com.algaworks.algafood.Service.RestauranteService;
 import com.algaworks.algafood.entity.Restaurante;
 import com.algaworks.algafood.exception.AlgaFoodRestricaoException;
@@ -13,6 +12,7 @@ import org.springframework.util.ReflectionUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.Field;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -20,12 +20,8 @@ import java.util.Map;
 @RequestMapping("restaurantes")
 public class RestauranteResource {
 
-
     @Autowired
     private RestauranteService service;
-
-    @Autowired
-    private RestauranteRepository repository;
 
     @GetMapping
     public List<Restaurante> listar() {
@@ -130,6 +126,22 @@ public class RestauranteResource {
 
     @GetMapping("/consultas")
     public List<Restaurante> buscarPorNome(@RequestParam("nome") String nome) {
-        return repository.nome(nome);
+        return service.buscarPorNome(nome);
+    }
+
+    @GetMapping("/parteString")
+    public List<Restaurante> buscarPorParteDoNome(@RequestParam("nome") String nome) {
+        return service.buscarPorParteDoNome(nome);
+    }
+
+    @GetMapping("/restaurantes-por-taxa-frete")
+    public List<Restaurante> buscarRestaurantesPorIntervaloDeTaxaFrete(@RequestParam("txInicial") BigDecimal txInicial,
+                                                                       @RequestParam("txFinal") BigDecimal txFinal) {
+        return service.buscarRestaurantesPorIntervaloDeTaxaFrete(txInicial, txFinal);
+    }
+
+    @GetMapping("/nome-id")
+    public List<Restaurante> buscarPorParteDoNome(String nome, Long cozinhaId) {
+        return service.buscarPorNomeRestauranteIdCozinhaa(nome, cozinhaId);
     }
 }

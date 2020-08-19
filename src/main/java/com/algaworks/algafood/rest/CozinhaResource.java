@@ -39,6 +39,11 @@ public class CozinhaResource {
         return service.buscarPorNome(nome);
     }
 
+    @GetMapping("consultas")
+    public List<Cozinha> buscarPorParteNome(@RequestParam String nome) {
+        return service.buscarPorNome(nome);
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Cozinha salvar(@RequestBody Cozinha cozinha) {
