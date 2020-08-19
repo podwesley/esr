@@ -1,5 +1,6 @@
 package com.algaworks.algafood.rest;
 
+import com.algaworks.algafood.Repository.RestauranteRepository;
 import com.algaworks.algafood.Service.RestauranteService;
 import com.algaworks.algafood.entity.Restaurante;
 import com.algaworks.algafood.exception.AlgaFoodRestricaoException;
@@ -22,6 +23,9 @@ public class RestauranteResource {
 
     @Autowired
     private RestauranteService service;
+
+    @Autowired
+    private RestauranteRepository repository;
 
     @GetMapping
     public List<Restaurante> listar() {
@@ -122,5 +126,10 @@ public class RestauranteResource {
         });
 
         return alterar(findRestaurante, id);
+    }
+
+    @GetMapping("/consultas")
+    public List<Restaurante> buscarPorNome(@RequestParam("nome") String nome) {
+        return repository.nome(nome);
     }
 }
