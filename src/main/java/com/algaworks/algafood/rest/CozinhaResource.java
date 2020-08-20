@@ -34,12 +34,12 @@ public class CozinhaResource {
         return ResponseEntity.ok(cozinha);
     }
 
-    @GetMapping("consultas")
+    @GetMapping("consultar-nome")
     public List<Cozinha> buscarPorNome(@RequestParam String nome) {
         return service.buscarPorNome(nome);
     }
 
-    @GetMapping("consultas")
+    @GetMapping("consultar-parte-nome")
     public List<Cozinha> buscarPorParteNome(@RequestParam String nome) {
         return service.buscarPorNome(nome);
     }
@@ -75,5 +75,9 @@ public class CozinhaResource {
         }
     }
 
+    @GetMapping("verificar")
+    public boolean existehhhhh(String cozinhaNome) {
+        return service.verificarSeCozinhaExiste(cozinhaNome);
+    }
 
 }

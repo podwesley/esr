@@ -60,4 +60,8 @@ public class CozinhaService {
             throw new AlgaFoodResultadoVazioException(String.format("a cozinha de id: %d não existe.", id));
         }
     }
+
+    public boolean verificarSeCozinhaExiste(String nomeCozinha) {
+        return repository.existsByNome(nomeCozinha);
+    }
 }

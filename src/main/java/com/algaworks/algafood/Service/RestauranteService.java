@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RestauranteService {
@@ -67,13 +68,23 @@ public class RestauranteService {
         return repository.findBynome(nome);
     }
 
-    public List<Restaurante> buscarPorParteDoNome (String parteNome) {
+    public List<Restaurante> buscarPorParteDoNome(String parteNome) {
         return repository.findByNomeContaining(parteNome);
     }
 
-    public List<Restaurante> buscarPorNomeRestauranteIdCozinhaa (String nome, Long cozinha) {
+    public List<Restaurante> buscarPorNomeRestauranteIdCozinhaa(String nome, Long cozinha) {
         return repository.findByNomeContainingAndCozinhaId(nome, cozinha);
     }
 
+    public Optional<Restaurante> buscarPrimeiroRestaurantePesquisa(String nome) {
+        return repository.findFirstByNomeContaining(nome);
+    }
 
+    public List<Restaurante> buscarPrimeiros2RestaurantesQueContem(String nome) {
+        return repository.findTop2ByNomeContaining(nome);
+    }
+
+    public int restaurantesPorCozinhaId(Long cozinhaId) {
+        return repository.countByCozinhaId(cozinhaId);
+    }
 }

@@ -15,6 +15,7 @@ import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("restaurantes")
@@ -144,4 +145,20 @@ public class RestauranteResource {
     public List<Restaurante> buscarPorParteDoNome(String nome, Long cozinhaId) {
         return service.buscarPorNomeRestauranteIdCozinhaa(nome, cozinhaId);
     }
+
+    @GetMapping("/buscar-top")
+    public Optional<Restaurante> buscarPrimeiroRestaurante(String nome) {
+        return service.buscarPrimeiroRestaurantePesquisa(nome);
+    }
+
+    @GetMapping("/buscar-top2")
+    public List<Restaurante> buscarPrimeiros2Restaurantes(String nome) {
+        return service.buscarPrimeiros2RestaurantesQueContem(nome);
+    }
+
+    @GetMapping("quantidade-restaurantes-cozinha-id")
+    public int restaurantesPorCozinhaId(Long cozinhaId) {
+        return service.restaurantesPorCozinhaId(cozinhaId);
+    }
+
 }
