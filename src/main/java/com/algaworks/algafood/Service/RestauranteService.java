@@ -99,4 +99,8 @@ public class RestauranteService {
     public List<Restaurante> buscar(String nome, BigDecimal taxaFreteInicial, BigDecimal taxaFreteFinal) {
         return repository.find(nome, taxaFreteInicial, taxaFreteFinal);
     }
+
+    public List<Restaurante> buscarDinamico(String nome, BigDecimal taxaFreteInicial, BigDecimal taxaFreteFinal) {
+        return repository.findDinamico(nome, taxaFreteInicial, taxaFreteFinal);
+    }
 }

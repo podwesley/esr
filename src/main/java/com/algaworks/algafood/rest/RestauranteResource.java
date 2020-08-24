@@ -175,4 +175,9 @@ public class RestauranteResource {
     public List<Restaurante> buscar(String nome, BigDecimal taxaFreteInicial, BigDecimal taxaFreteFinal) {
         return service.buscar(nome, taxaFreteInicial, taxaFreteFinal);
     }
+
+    @GetMapping("quantidade-restaurantes-cozinha-id-query4")
+    public List<Restaurante> buscarDinamico(String nome, BigDecimal taxaFreteInicial, BigDecimal taxaFreteFinal) {
+        return service.buscarDinamico(nome, taxaFreteInicial, taxaFreteFinal);
+    }
 }
