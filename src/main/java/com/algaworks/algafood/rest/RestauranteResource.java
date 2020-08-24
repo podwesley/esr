@@ -165,4 +165,9 @@ public class RestauranteResource {
     public List<Restaurante> restaurantesPorCozinhaId(String nome, Long cozinhaId) {
         return service.consultarPorNome(nome, cozinhaId);
     }
+
+    @GetMapping("quantidade-restaurantes-cozinha-id-query2")
+    public List<Restaurante> restaurantesPorCozinhaId2(String nome, Long cozinhaId) {
+        return service.consultarPorNome2(nome, cozinhaId);
+    }
 }

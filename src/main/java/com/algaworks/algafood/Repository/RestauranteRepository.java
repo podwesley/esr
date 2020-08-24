@@ -18,13 +18,18 @@ public interface RestauranteRepository extends JpaRepository<Restaurante, Long> 
 
     List<Restaurante> findByNomeContainingAndCozinhaId(String nome, Long cozinha);
 
-    @Query("from Restaurante where nome like %:nome% and cozinha.id = :idCozinha")
+    @Query("from Restaurante where nome like %:nome% and cozinha.id = :idCozinha") //Ítem 5.9
     List<Restaurante> consultarPorNome(String nome, Long idCozinha);
+
+
+    List<Restaurante> consultarPorNome2(String nome, Long idCozinha);
 
     Optional<Restaurante> findFirstByNomeContaining(String nome);
 
     List<Restaurante> findTop2ByNomeContaining(String nome);
 
     int countByCozinhaId(Long id);
+
+
 
 }
