@@ -1,5 +1,6 @@
 package com.algaworks.algafood.Repository;
 
+import com.algaworks.algafood.Repository.customizado.RestauranteRepositoryCustom;
 import com.algaworks.algafood.entity.Restaurante;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -8,7 +9,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
-public interface RestauranteRepository extends JpaRepository<Restaurante, Long> {
+public interface RestauranteRepository extends JpaRepository<Restaurante, Long>, RestauranteRepositoryCustom {
 
     List<Restaurante> findBynome(String nome);
 
@@ -21,7 +22,6 @@ public interface RestauranteRepository extends JpaRepository<Restaurante, Long> 
     @Query("from Restaurante where nome like %:nome% and cozinha.id = :idCozinha") //Ítem 5.9
     List<Restaurante> consultarPorNome(String nome, Long idCozinha);
 
-
     List<Restaurante> consultarPorNome2(String nome, Long idCozinha);
 
     Optional<Restaurante> findFirstByNomeContaining(String nome);
@@ -29,7 +29,4 @@ public interface RestauranteRepository extends JpaRepository<Restaurante, Long> 
     List<Restaurante> findTop2ByNomeContaining(String nome);
 
     int countByCozinhaId(Long id);
-
-
-
 }

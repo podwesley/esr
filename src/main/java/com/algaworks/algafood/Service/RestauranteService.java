@@ -88,11 +88,15 @@ public class RestauranteService {
         return repository.countByCozinhaId(cozinhaId);
     }
 
-    public List<Restaurante> consultarPorNome (String nome, Long id) {
-        return repository.consultarPorNome(nome,id);
+    public List<Restaurante> consultarPorNome(String nome, Long id) {
+        return repository.consultarPorNome(nome, id);
     }
 
-    public List<Restaurante> consultarPorNome2 (String nome, Long id) {
-        return repository.consultarPorNome2(nome,id);
+    public List<Restaurante> consultarPorNome2(String nome, Long id) {
+        return repository.consultarPorNome2(nome, id);
+    }
+
+    public List<Restaurante> buscar(String nome, BigDecimal taxaFreteInicial, BigDecimal taxaFreteFinal) {
+        return repository.find(nome, taxaFreteInicial, taxaFreteFinal);
     }
 }

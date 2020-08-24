@@ -170,4 +170,9 @@ public class RestauranteResource {
     public List<Restaurante> restaurantesPorCozinhaId2(String nome, Long cozinhaId) {
         return service.consultarPorNome2(nome, cozinhaId);
     }
+
+    @GetMapping("quantidade-restaurantes-cozinha-id-query3")
+    public List<Restaurante> buscar(String nome, BigDecimal taxaFreteInicial, BigDecimal taxaFreteFinal) {
+        return service.buscar(nome, taxaFreteInicial, taxaFreteFinal);
+    }
 }
