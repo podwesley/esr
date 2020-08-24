@@ -40,6 +40,10 @@ public class CidadeService {
 
     }
 
+    public List<Cidade> buscarPor(String nome) {
+       return repository.findByNome(nome);
+    }
+
     public Cidade salvar(Cidade cidade) {
 
         Long idEstado = cidade.getEstado().getId();

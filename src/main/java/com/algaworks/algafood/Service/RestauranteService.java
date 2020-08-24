@@ -87,4 +87,8 @@ public class RestauranteService {
     public int restaurantesPorCozinhaId(Long cozinhaId) {
         return repository.countByCozinhaId(cozinhaId);
     }
+
+    public List<Restaurante> consultarPorNome (String nome, Long id) {
+        return repository.consultarPorNome(nome,id);
+    }
 }
