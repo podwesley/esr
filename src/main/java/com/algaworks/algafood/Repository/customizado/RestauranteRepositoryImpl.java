@@ -7,6 +7,8 @@ import org.springframework.util.StringUtils;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
@@ -57,6 +59,18 @@ public class RestauranteRepositoryImpl implements RestauranteRepositoryCustom {
         parametros.forEach((key, value) -> {
             query.setParameter(key, value);
         });
+
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Restaurante> findComCriteriaAPI(String nome, BigDecimal taxaFreteInicial, BigDecimal taxaFreteFinal) {
+
+        CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder();
+        CriteriaQuery<Restaurante> criteriaQuery = criteriaBuilder.createQuery(Restaurante.class);
+        criteriaQuery.from(Restaurante.class);
+
+        TypedQuery<Restaurante> query = manager.createQuery(criteriaQuery);
 
         return query.getResultList();
     }
