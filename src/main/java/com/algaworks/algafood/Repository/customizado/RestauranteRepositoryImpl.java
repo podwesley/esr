@@ -81,7 +81,6 @@ public class RestauranteRepositoryImpl implements RestauranteRepositoryCustom {
         if (taxaFreteInicial != null)
             predicates.add(criteriaBuilder.greaterThanOrEqualTo(rootRestaurante.get("taxaFrete"), taxaFreteInicial));
 
-
         if (taxaFreteFinal != null)
             predicates.add(criteriaBuilder.lessThanOrEqualTo(rootRestaurante.get("taxaFrete"), taxaFreteFinal));
 
@@ -91,4 +90,5 @@ public class RestauranteRepositoryImpl implements RestauranteRepositoryCustom {
 
         return query.getResultList();
     }
+
 }

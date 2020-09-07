@@ -2,6 +2,7 @@ package com.algaworks.algafood.Service;
 
 import com.algaworks.algafood.Repository.CozinhaRepository;
 import com.algaworks.algafood.Repository.RestauranteRepository;
+import com.algaworks.algafood.Repository.specification.RestauranteComFreteGratisSpecification;
 import com.algaworks.algafood.entity.Cozinha;
 import com.algaworks.algafood.entity.Restaurante;
 import com.algaworks.algafood.exception.AlgaFoodRestricaoException;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import java.math.BigDecimal;
 import java.util.List;

@@ -3,6 +3,7 @@ INSERT INTO COZINHA (id, nome) VALUES (2 ,'Indiana');
 
 INSERT INTO RESTAURANTE (id, nome, taxa_frete , cozinha_id) VALUES (1 ,'Comida Brasileira' , 2.40 , 1);
 INSERT INTO RESTAURANTE (id, nome, taxa_frete, cozinha_id) VALUES (2 , 'Comida Americana' , 10.00 , 2);
+INSERT INTO RESTAURANTE (id, nome, taxa_frete, cozinha_id) VALUES (3 , 'Comida Chinesa' , 0.00 , 2);
 
 INSERT INTO FORMA_PAGAMENTO(id, descricao) VALUES (1,'Dinheiro');
 INSERT INTO FORMA_PAGAMENTO(id, descricao) VALUES (2,'Cartão de crédito');

@@ -2,14 +2,16 @@ package com.algaworks.algafood.Repository;
 
 import com.algaworks.algafood.Repository.customizado.RestauranteRepositoryCustom;
 import com.algaworks.algafood.entity.Restaurante;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
-public interface RestauranteRepository extends JpaRepository<Restaurante, Long>, RestauranteRepositoryCustom {
+public interface RestauranteRepository extends JpaRepository<Restaurante, Long>, RestauranteRepositoryCustom, JpaSpecificationExecutor<Restaurante> {
 
     List<Restaurante> findBynome(String nome);
 

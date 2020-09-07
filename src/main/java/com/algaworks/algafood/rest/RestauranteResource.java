@@ -1,5 +1,8 @@
 package com.algaworks.algafood.rest;
 
+import com.algaworks.algafood.Repository.RestauranteRepository;
+import com.algaworks.algafood.Repository.specification.RestauranteComFreteGratisSpecification;
+import com.algaworks.algafood.Repository.specification.RestauranteComNomeSemelhanteSpecification;
 import com.algaworks.algafood.Service.RestauranteService;
 import com.algaworks.algafood.entity.Restaurante;
 import com.algaworks.algafood.exception.AlgaFoodRestricaoException;
@@ -23,6 +26,9 @@ public class RestauranteResource {
 
     @Autowired
     private RestauranteService service;
+
+    @Autowired
+    private RestauranteRepository repository;
 
     @GetMapping
     public List<Restaurante> listar() {
@@ -179,5 +185,12 @@ public class RestauranteResource {
     @GetMapping("quantidade-restaurantes-cozinha-id-query4")
     public List<Restaurante> buscarDinamico(String nome, BigDecimal taxaFreteInicial, BigDecimal taxaFreteFinal) {
         return service.buscarDinamico(nome, taxaFreteInicial, taxaFreteFinal);
+    }
+
+    @GetMapping("/restaurantes/com-frete-gratis")
+    public List<Restaurante> restaurantesComFreteGratis(String nome) {
+        RestauranteComFreteGratisSpecification restauranteComFreteGratisSpecification = new RestauranteComFreteGratisSpecification();
+        RestauranteComNomeSemelhanteSpecification restauranteComNomeSemelhanteSpecification = new RestauranteComNomeSemelhanteSpecification(nome);
+        return repository.findAll(restauranteComFreteGratisSpecification.and(restauranteComNomeSemelhanteSpecification));
     }
 }
