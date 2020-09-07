@@ -9,6 +9,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
@@ -68,7 +70,13 @@ public class RestauranteRepositoryImpl implements RestauranteRepositoryCustom {
 
         CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder();
         CriteriaQuery<Restaurante> criteriaQuery = criteriaBuilder.createQuery(Restaurante.class);
-        criteriaQuery.from(Restaurante.class);
+        Root<Restaurante> rootRestaurante = criteriaQuery.from(Restaurante.class);
+
+        Predicate nomePredicate = criteriaBuilder.like(rootRestaurante.get("nome"), "%" + nome + "%");
+        Predicate txInicial = criteriaBuilder.greaterThanOrEqualTo(rootRestaurante.get("taxaFrete"), taxaFreteInicial);
+        Predicate txFinal = criteriaBuilder.lessThanOrEqualTo(rootRestaurante.get("taxaFrete"), taxaFreteFinal);
+
+        criteriaQuery.where(nomePredicate, txInicial, txFinal);
 
         TypedQuery<Restaurante> query = manager.createQuery(criteriaQuery);
 
