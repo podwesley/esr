@@ -7,7 +7,6 @@ import com.algaworks.algafood.exception.AlgaFoodRestricaoException;
 import com.algaworks.algafood.exception.AlgaFoodResultadoVazioException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ReflectionUtils;
@@ -187,6 +186,11 @@ public class RestauranteResource {
     @GetMapping("quantidade-restaurantes-cozinha-id-query4")
     public List<Restaurante> buscarDinamico(String nome, BigDecimal taxaFreteInicial, BigDecimal taxaFreteFinal) {
         return service.buscarDinamico(nome, taxaFreteInicial, taxaFreteFinal);
+    }
+
+    @GetMapping("quantidade-restaurantes-frete-gratis-criteria-api")
+    public List<Restaurante> buscarFreteGratisComCriteriaAPI(String nome, BigDecimal taxaFreteInicial, BigDecimal taxaFreteFinal) {
+        return service.buscarFreteGratisComCriteriaAPI(nome, taxaFreteInicial, taxaFreteFinal);
     }
 
     @GetMapping("/restaurantes/com-frete-gratis")

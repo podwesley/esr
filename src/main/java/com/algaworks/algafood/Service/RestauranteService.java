@@ -109,4 +109,8 @@ public class RestauranteService {
         return repository.findAll(specification1.and(specification2));
     }
 
+    public List<Restaurante> buscarFreteGratisComCriteriaAPI(String nome, BigDecimal taxaFreteInicial, BigDecimal taxaFreteFinal){
+        return repository.findComCriteriaAPI(nome, taxaFreteInicial, taxaFreteFinal);
+    }
+
 }
