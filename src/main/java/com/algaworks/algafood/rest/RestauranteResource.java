@@ -28,9 +28,6 @@ public class RestauranteResource {
     @Autowired
     private RestauranteService service;
 
-    @Autowired
-    private RestauranteRepository repository;
-
     @GetMapping
     public List<Restaurante> listar() {
         return service.todas();

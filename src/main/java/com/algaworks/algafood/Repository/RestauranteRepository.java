@@ -2,8 +2,6 @@ package com.algaworks.algafood.Repository;
 
 import com.algaworks.algafood.Repository.customizado.RestauranteRepositoryCustom;
 import com.algaworks.algafood.entity.Restaurante;
-import org.springframework.data.jpa.domain.Specification;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 
@@ -11,7 +9,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
-public interface RestauranteRepository extends JpaRepository<Restaurante, Long>, RestauranteRepositoryCustom, JpaSpecificationExecutor<Restaurante> {
+public interface RestauranteRepository extends CustomJpaRepository<Restaurante, Long>, RestauranteRepositoryCustom, JpaSpecificationExecutor<Restaurante> {
 
     List<Restaurante> findBynome(String nome);
 
@@ -21,7 +19,8 @@ public interface RestauranteRepository extends JpaRepository<Restaurante, Long>,
 
     List<Restaurante> findByNomeContainingAndCozinhaId(String nome, Long cozinha);
 
-    @Query("from Restaurante where nome like %:nome% and cozinha.id = :idCozinha") //Ítem 5.9
+    //Ítem 5.9
+    @Query("from Restaurante where nome like %:nome% and cozinha.id = :idCozinha")
     List<Restaurante> consultarPorNome(String nome, Long idCozinha);
 
     List<Restaurante> consultarPorNome2(String nome, Long idCozinha);
@@ -32,6 +31,6 @@ public interface RestauranteRepository extends JpaRepository<Restaurante, Long>,
 
     int countByCozinhaId(Long id);
 
-    public List<Restaurante> findComCriteriaAPI(String nome, BigDecimal taxaFreteInicial, BigDecimal taxaFreteFinal);
+    List<Restaurante> findComCriteriaAPI(String nome, BigDecimal taxaFreteInicial, BigDecimal taxaFreteFinal);
 
 }

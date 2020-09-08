@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @Repository
-public class RestauranteRepositoryImpl implements RestauranteRepositoryCustom {
+public class RestauranteRepositoryCustomImpl implements RestauranteRepositoryCustom {
 
     @PersistenceContext
     private EntityManager manager;

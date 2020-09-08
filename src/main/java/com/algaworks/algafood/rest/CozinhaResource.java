@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("cozinhas")
@@ -78,6 +79,11 @@ public class CozinhaResource {
     @GetMapping("verificar")
     public boolean existehhhhh(String cozinhaNome) {
         return service.verificarSeCozinhaExiste(cozinhaNome);
+    }
+
+    @GetMapping("buscarPrimeiro")
+    public Optional<Cozinha> buscarPrimeiro() {
+        return service.buscarPrimeiro();
     }
 
 }
