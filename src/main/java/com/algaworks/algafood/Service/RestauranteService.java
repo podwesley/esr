@@ -2,7 +2,6 @@ package com.algaworks.algafood.Service;
 
 import com.algaworks.algafood.Repository.CozinhaRepository;
 import com.algaworks.algafood.Repository.RestauranteRepository;
-import com.algaworks.algafood.Repository.specification.RestauranteComFreteGratisSpecification;
 import com.algaworks.algafood.entity.Cozinha;
 import com.algaworks.algafood.entity.Restaurante;
 import com.algaworks.algafood.exception.AlgaFoodRestricaoException;
@@ -10,8 +9,8 @@ import com.algaworks.algafood.exception.AlgaFoodResultadoVazioException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -105,4 +104,9 @@ public class RestauranteService {
     public List<Restaurante> buscarDinamico(String nome, BigDecimal taxaFreteInicial, BigDecimal taxaFreteFinal) {
         return repository.findDinamico(nome, taxaFreteInicial, taxaFreteFinal);
     }
+
+    public List<Restaurante> buscarFreteGratis(Specification<Restaurante> specification1, Specification<Restaurante> specification2) {
+        return repository.findAll(specification1.and(specification2));
+    }
+
 }

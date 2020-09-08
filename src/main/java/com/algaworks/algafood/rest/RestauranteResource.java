@@ -1,14 +1,13 @@
 package com.algaworks.algafood.rest;
 
 import com.algaworks.algafood.Repository.RestauranteRepository;
-import com.algaworks.algafood.Repository.specification.RestauranteComFreteGratisSpecification;
-import com.algaworks.algafood.Repository.specification.RestauranteComNomeSemelhanteSpecification;
 import com.algaworks.algafood.Service.RestauranteService;
 import com.algaworks.algafood.entity.Restaurante;
 import com.algaworks.algafood.exception.AlgaFoodRestricaoException;
 import com.algaworks.algafood.exception.AlgaFoodResultadoVazioException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ReflectionUtils;
@@ -19,6 +18,9 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+
+import static com.algaworks.algafood.Repository.specification.RestauranteSpecification.comFreteGratis;
+import static com.algaworks.algafood.Repository.specification.RestauranteSpecification.comNomeSemelhante;
 
 @RestController
 @RequestMapping("restaurantes")
@@ -189,8 +191,6 @@ public class RestauranteResource {
 
     @GetMapping("/restaurantes/com-frete-gratis")
     public List<Restaurante> restaurantesComFreteGratis(String nome) {
-        RestauranteComFreteGratisSpecification restauranteComFreteGratisSpecification = new RestauranteComFreteGratisSpecification();
-        RestauranteComNomeSemelhanteSpecification restauranteComNomeSemelhanteSpecification = new RestauranteComNomeSemelhanteSpecification(nome);
-        return repository.findAll(restauranteComFreteGratisSpecification.and(restauranteComNomeSemelhanteSpecification));
+        return service.buscarFreteGratis(comFreteGratis(), (comNomeSemelhante(nome)));
     }
 }
